@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {tryLoadUser} from '../../state/ducks/user';
+import type {UserState} from '../../state/ducks/user';
+
+const selectUserReducer = (state: UserState) => state.user;
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +18,6 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'purple',
     borderRadius: 15,
   },
   buttonLabel: {
@@ -27,14 +29,27 @@ const styles = StyleSheet.create({
 
 export const FooterSection = () => {
   const dispatch = useDispatch();
+  const {loading} = useSelector(selectUserReducer);
 
   function loadNewUser() {
     dispatch(tryLoadUser());
   }
 
+  const disabledStyle = {
+    backgroundColor: loading ? 'gray' : 'purple',
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={loadNewUser}>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          {
+            ...disabledStyle,
+          },
+        ]}
+        onPress={loadNewUser}
+        disabled={loading}>
         <Text style={styles.buttonLabel}>Gerar outro</Text>
       </TouchableOpacity>
     </View>
