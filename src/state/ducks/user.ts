@@ -14,6 +14,7 @@ type State = {
   phone: string;
   avatar: string;
   loading: boolean;
+  hasError: boolean;
 };
 
 const INITIAL_STATE: State = {
@@ -24,6 +25,7 @@ const INITIAL_STATE: State = {
   userName: '',
   avatar: '',
   loading: false,
+  hasError: false,
 };
 
 interface DispatchAction extends Action {
@@ -52,6 +54,7 @@ export const UserReducer: Reducer<State, DispatchAction> = (
       return {
         ...state,
         loading: false,
+        hasError: true,
       };
     case Types.TRY_LOAD_USER:
       return {

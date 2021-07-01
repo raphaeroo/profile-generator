@@ -21,6 +21,14 @@ const selectUserReducer = (state: UserState) => state.user;
 export const BodySection = () => {
   const user = useSelector(selectUserReducer);
 
+  if (user.hasError) {
+    return (
+      <View style={styles.container}>
+        <Text>DEU RUIM</Text>
+      </View>
+    );
+  }
+
   if (user.userName === '') {
     return (
       <View style={styles.container}>

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 export const HeaderSection = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gerador de Perfis</Text>
+      <Text style={styles.title}>The best profile generator</Text>
     </View>
   );
 };
