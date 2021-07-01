@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
 export const FooterSection = () => {
   const dispatch = useDispatch();
-  const {loading} = useSelector(selectUserReducer);
+  const {loading, userName} = useSelector(selectUserReducer);
 
   function loadNewUser() {
     dispatch(tryLoadUser());
@@ -50,7 +50,9 @@ export const FooterSection = () => {
         ]}
         onPress={loadNewUser}
         disabled={loading}>
-        <Text style={styles.buttonLabel}>Gerar outro</Text>
+        <Text style={styles.buttonLabel}>
+          {userName === '' ? 'Criar novo' : 'Gerar outro'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
